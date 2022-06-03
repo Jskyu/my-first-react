@@ -2,10 +2,21 @@ https://codingapple.com/course/react-basic/ \
 React 리액트 기초부터 쇼핑몰 프로젝트까지! 수강일지
 
 ## Installation
+>blog
 ```
 git clone https://github.com/Jskyu/my-first-react.git
+cd blog
 npm start
 ```
+
+>shop [22022-06-03일 기준. 안된다면 react-bootstrap에 접속하여 설치후 npm start]
+```
+git clone https://github.com/Jskyu/my-first-react.git
+cd shop
+npm install react-bootstrap
+npm start
+```
+
 > *Downloads*\
 `NodeJS 16.15.1 LTS` https://nodejs.org/dist/v16.15.1/ \
 `Visual Studio Code` https://code.visualstudio.com/#alt-downloads
@@ -15,6 +26,8 @@ npm start
 
 ## `Part 1. 블로그 제작 & 기초 문법`
 https://jskyu.github.io/my-first-react-blog/
+
+## state, component, props
 >state 란?
 ```
 react(리액트)를 다루는 핵심으로,
@@ -27,7 +40,6 @@ props를 사용했는데도 state를 사용하는 이유는, 사용하는 쪽과
 ```
 <br>
 
-## state, component, props
 >state 기본 문법
 ```
 let [stateValue, setState] = useState('val');
@@ -131,3 +143,105 @@ class ExamComp extends React.Component {
 ```
 
 ## `Part 2. 쇼핑몰 프로젝트`
+
+### import export
+<br>
+
+Part 2. 쇼핑몰 프로젝트의 시작은 Bootstrap을 설치하고, import 하는것이었는데 정확히 짚고 넘어가고 싶어 찾아봤던 내용부터 정리해보겠다.
+
+>import 구문
+```js
+import './App.css';//css파일을 import 할 때엔 경로를 입력한다.
+import exam from './url';//Component, Image, 다른 js파일 등을 
+                        //import 할 때엔 이름을 주어 사용해야 한다.
+import foo from './img/foo.png';//foo.png 이미지를 foo 이름으로 사용하겠다.
+
+function App() {
+  return (
+    <div>
+      ...
+      <div style={{ backgroundImage : 'url(' + foo + ')'}}>
+    </div>
+  );
+}
+```
+<br>
+
+컴포넌트(Component)는 하나의 파일에 여러개가 존재할 수 있으며, 다른 파일에서 해당 컴포넌트를 `import` 하기 위해서는 `export`를 해야한다.
+`export` 하는 방법은 두가지가 있다.
+1. `export default Comp;`
+2. `export {Comp1, Comp2};` \
+`export default` 키워드로 내보내기를 할 시 하나의 파일당 하나의 컴포넌트만을 `export` 할 수 있다.\
+다만, `export default`와 `export` 키워드를 중복하여 사용할 수 있다.
+또한 Component 뿐만 아닌 state, function, variable 등을 export하여 다른 파일에서 사용할 수 있다.
+
+> #### `예시`
+> 각각 App.js, comp/Comp.js
+```js
+//App.js
+import Comp1, {Comp2, Comp3} from './comp/Comp';
+// comp폴더의 Comp.js파일에 존재하는 컴포넌트 Comp1, Comp2, Comp3을 사용하겠다는 뜻이다.
+//단, Comp1 은 export default이다.
+
+function App() {
+  return (
+    <div>
+    
+      ...
+      <Comp1/>
+      <Comp2/>
+      <Comp3/>
+    </div>
+  );
+}
+export default App;
+```
+```js
+//comp/Comp.js
+import React from 'react';
+
+class Comp1 extends React.Component {
+    render() {
+        return( 
+            <h3>Hello! Comp1</h3>
+        );
+    }
+}
+
+class Comp2 extends React.Component {
+    render(){
+        return(
+            <h3>Hello! Comp2</h3>
+        );
+    }
+}
+
+class Comp3 extends React.Component {
+    render() {
+        return(
+            <h3>Hello! Comp3</h3>
+        );
+    }
+}
+
+export default Comp1;
+export {Comp2, Comp3};
+/* export 하는 문법 또한 람다로 표현 가능하다.
+export default Comp1 = ()=>{
+  return(
+    <h3>Hello! Comp1</h3>
+  );
+},
+export const Comp2 = ()=>{
+  return(
+    <h3>Hello! Comp2</h3>
+  );
+}
+const Comp3 = ()=>{
+  return(
+    <h3>Hello! Comp2</h3>
+  );
+}
+export Comp3;
+*/
+```
