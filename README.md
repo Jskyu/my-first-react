@@ -30,9 +30,9 @@ props를 사용했는데도 state를 사용하는 이유는, 사용하는 쪽과
 ## state, component, props
 >state 기본 문법
 ```
-let [stateAttribute, setState] = useState('attribute');
+let [stateValue, setState] = useState('val');
 
-stateAttribute = state 에 담아놓은 데이터 변수. stateAttribute에는 'attribute' 가 담긴다.\
+stateValue = state 에 담아놓은 데이터 변수. stateValue에는 'val' 이 담긴다.
 setState = state 의 변경을 도와주는 함수
 ```
 <br>
@@ -67,26 +67,26 @@ let b = nums[1];
 
 >props 란?
 ```
-React 에서 컴포넌트로 작성한 요소를 JSX Attribute와 자식을 하위 컴포넌트로 전달해주는 객체이다.
+React 에서 컴포넌트로 작성한 요소를 하위 컴포넌트로 전달해주는 객체이다.
 
 props의 특징
 - 부모 컴포넌트가 자식 컴포넌트에 값을 전달할때 사용한다.
 - 전달받은 자식 컴포넌트는 값을 수정할 수 없다.
 - 갯수의 제한 없이 전달 할 수 있다.
-- 단방향 데이터 전달 방식으로, 자식 컴포넌트가 부모 컴포넌트 방향 또는 같은 기수 컴포넌트 방향으로는 전달할 수 없다.
+- 단방향 데이터 전달 방식으로, 자식 컴포넌트가 부모 컴포넌트 또는 형제 컴포넌트로는 전달할 수 없다.
 ```
 <br>
 
 >props, component 예시
 ```js
 //props 객체의 요소는 컴포넌트를 호출 할 때 지정한 이름으로 자식 컴포넌트에서 사용할 수 있다.
-<ExamCompn state={state} color={'skyblue'}
+<ExamComp state={state} color={'skyblue'}
   clickEvent={() => {
     console.log('Hello World !!');
 }}/>
 ...
 
-const ExamCompn = (props)=>{
+const ExamComp = (props)=>{
   return (
     <div style={{background : props.color}}>
       <h4>{props.state.title}</h4>
