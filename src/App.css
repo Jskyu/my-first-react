@@ -2,9 +2,15 @@
   text-align: center;
 }
 
-span {
-  text-align: right;
+.contents{
+  display: inline-block;
+  width: 750px;
 }
+
+.btn-right {
+  float: right;
+}
+
 .modal {
   margin-top: 20px;
   padding: 20px;

@@ -14,6 +14,7 @@ npm start
 `Visual Studio Code 1.67`
 
 ## `Part 1. 블로그 제작 & 기초 문법`
+https://jskyu.github.io/my-first-react-blog/
 >state 란?
 ```
 react(리액트)를 다루는 핵심으로,
@@ -95,4 +96,36 @@ const ExamCompn = (props)=>{
   );
 }
 //props 객체의 요소를 호출할 때엔 위와 같이 props.요소이름 형식으로 사용한다.
+```
+<br>
+
+>기존 문법 (참고용)
+```js
+class ExamComp extends React.Component {
+  constructor(){
+    super();
+    this.state = {//기존 문법에서는 this 키워드로 state를 조작해야한다.
+      exam1 : "Hello",
+      exam2 : "React"
+    }
+  }
+  
+  examFunc(){
+    this.setState({ exam1: "CHANGE" });
+  }
+  
+  render(){
+    return (
+      <div>
+        <h3>{this.state.exam1} {this.state.exam2}</h3>
+
+        <button onClick={() => { this.examFunc.bind(this) }
+        }>state변경1</button>
+
+        <button onClick={() => { this.setState( { exam2 : "CHANGE" })}}>state변경2</button>
+        
+      </div>
+    )
+  }
+}
 ```
