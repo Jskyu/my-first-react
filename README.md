@@ -1,20 +1,30 @@
 https://codingapple.com/course/react-basic/ \
 React 리액트 기초부터 쇼핑몰 프로젝트까지! 수강일지
 
+## Pages
+- [Blog] https://jskyu.github.io/my-first-react-blog/
+- [Shop] https://jskyu.github.io/my-first-react-shop/
+
 ## Installation
 >blog
 ```
-git clone https://github.com/Jskyu/my-first-react.git
-cd blog
-npm start
+1. NodeJs Download
+2. [Windows] : Powershell, [Mac] Terminal 에서 `npx create-react-app blog`
+3. git clone https://github.com/Jskyu/my-first-react.git
+4. [2] 폴더에 소스 덮어쓰기
+5. [2] 폴더에서 npm start
 ```
 
 >shop [22022-06-03일 기준. 안된다면 react-bootstrap에 접속하여 설치후 npm start]
 ```
-git clone https://github.com/Jskyu/my-first-react.git
-cd shop
-npm install react-bootstrap
-npm start
+1. NodeJs Download
+2. [Windows] : Powershell, [Mac] Terminal 에서 `npx create-react-app shop`
+3. git clone https://github.com/Jskyu/my-first-react.git
+4. [2] 폴더에 소스 덮어쓰기
+5. [2] 폴더에서 npm install react-router-dom@6
+6. [2] 폴더에서 npm install react-bootstrap
+7. [2] 폴더에서 npm install styled-components
+8. npm start
 ```
 
 > *Downloads*\
@@ -25,9 +35,8 @@ npm start
 `Visual Studio Code 1.67`
 
 ## `Part 1. 블로그 제작 & 기초 문법`
-https://jskyu.github.io/my-first-react-blog/
 
-## state, component, props
+### state, component, props
 >state 란?
 ```
 react(리액트)를 다루는 핵심으로,
@@ -41,16 +50,16 @@ props를 사용했는데도 state를 사용하는 이유는, 사용하는 쪽과
 <br>
 
 >state 기본 문법
-```
+```js
 let [stateValue, setState] = useState('val');
 
-stateValue = state 에 담아놓은 데이터 변수. stateValue에는 'val' 이 담긴다.
-setState = state 의 변경을 도와주는 함수
+//stateValue = state 에 담아놓은 데이터 변수. stateValue에는 'val' 이 담긴다.
+//setState = state 의 변경을 도와주는 함수
 ```
 <br>
 
 let [a, b] = Array 표현방식은 `DeStructuring(구조분해할당)` 이라 하며, 아래와 같다.
-```
+```js
 let nums = [1, 2];
 let a = nums[0];
 let b = nums[1];
@@ -141,6 +150,7 @@ class ExamComp extends React.Component {
   }
 }
 ```
+<br>
 
 ## `Part 2. 쇼핑몰 프로젝트`
 
@@ -148,7 +158,7 @@ class ExamComp extends React.Component {
 <br>
 
 Part 2. 쇼핑몰 프로젝트의 시작은 Bootstrap을 설치하고, import 하는것이었는데 정확히 짚고 넘어가고 싶어 찾아봤던 내용부터 정리해보겠다.
-
+https://jskyu.github.io/my-first-react-shop/
 >import 구문
 ```js
 import './App.css';//css파일을 import 할 때엔 경로를 입력한다.
@@ -171,8 +181,10 @@ function App() {
 `export` 하는 방법은 두가지가 있다.
 1. `export default Comp;`
 2. `export {Comp1, Comp2};` \
+
 `export default` 키워드로 내보내기를 할 시 하나의 파일당 하나의 컴포넌트만을 `export` 할 수 있다.\
-다만, `export default`와 `export` 키워드를 중복하여 사용할 수 있다.
+다만, `export default`와 `export` 키워드를 중복하여 사용할 수 있다.\
+또한 `export default` 한 컴포넌트는 `import` 시 이름을 지정하여 사용할 수 있지만, `export` 한 컴포넌트는 해당 클래스의 이름으로만 사용할 수 있다.\
 또한 Component 뿐만 아닌 state, function, variable 등을 export하여 다른 파일에서 사용할 수 있다.
 
 > #### `예시`
@@ -244,4 +256,143 @@ const Comp3 = ()=>{
 }
 export Comp3;
 */
+```
+<br>
+
+### React-Router
+react의 서드파티 라이브러리로서 클라이언트 사이드에서 이루어지는 라우팅을 간단하게 해주면서도, 서버 사이드 렌더링을 도와주는 도구들 또한 있기에 싱글 페이지 React에서 여러 화면으로 구성된 웹 어플리케이션을 만들기 위해선 거의 필수적이라 할 수 있다.
+
+>Router 기본 문법
+```js
+<Route path="URL" element={<Component />}>
+```
+<br>
+
+### Url Parmeter
+Url Parameter는 말 그대로 URL 에 담겨있는 값을 파라미터로 사용하는 것이다.\
+Router 선언 시 url 부분중 parameter 로 사용할 값 앞에 클론(:)으로 명시한다.
+
+>Url Parameter 예시 \
+https://jskyu.github.io/my-first-react-shop/routeExam/Hello%20World!
+```js
+//Router 선언
+// /page/1234 로 접속했을 시 파라미터는 1234가 된다.
+<Routes>
+  <Route path="/page/:param" element={<Component />} />
+<Routes />
+```
+
+```js
+//컴포넌트 Component
+const Component = () => {
+  let {param} = useParams();
+
+  return(
+    <div>
+      <h4>입력된 파라미터는 {param} 입니다.</h4>
+    </div>
+  );
+}
+//접속 URL : /page/1234
+//출력 : 입력된 파라미터는 1234 입니다.
+
+//접속 URL : /page/Hello-World
+//출력 : 입력된 파라미터는 Hello-World 입니다.
+```
+<br>
+
+### Styled-Components
+Styled-Components는 동일한 컴포넌트에서 컴포넌트 이름을 쓰듯 스타일을 지정하는 것을 말한다.\
+CSS 파일을 사용하지 않아도 되고, 다른 CSS파일에 간섭하지 않는다는 장점이 있다.
+
+> Styled-Components 셋팅
+```
+1. 터미널에서 npm install styled-components
+2. 사용할 컴포넌트에 import styled from 'styled-components
+```
+
+> Styled-Components 예시 \
+https://jskyu.github.io/my-first-react-shop/styleComponent
+```js
+import styled from 'styled-components';
+
+let Box = styled.div`
+padding : 20px;
+color : grey
+`;
+
+let ExamBtn = styled.button`
+  outline: none;
+  color : black;
+  padding : 10px;
+`;
+
+// props로 변수 삽입 가능
+let Exam1Btn = styled(ExamBtn)`
+  background : ${props => props.bg === undefined ? 'red' : props.bg};
+`;
+
+//상속도 가능
+let Exam2Btn = styled(ExamBtn)`
+  background : ${props => props.bg === undefined ? 'green' : props.bg};
+`;
+
+const StyleComponent = () => {
+    return (
+      <Box>
+        <Exam1Btn>빨간색 버튼</Exam1Btn>
+        <Exam1Btn bg="blue">파란색 버튼</Exam1Btn>
+        <Exam2Btn>초록색 버튼</Exam2Btn>
+      </Box>
+    );
+  }
+```
+<br>
+
+### Component의 LifeCycle
+<!-- lifeCycleExam -->
+1. mount(생성)
+2. update(업데이트)
+3. unmount(제거)
+<img src="https://kyun2da.dev/static/69e54fe57da139eabae168b5e8304af4/01645/lifecycle.png">
+(자세한 내용 : https://ko.reactjs.org/docs/react-component.html) \
+<br><br>
+
+> LifeCycle 주기별 실행 함수 \
+https://jskyu.github.io/my-first-react-shop/lifeCycleExam
+```js
+import { useEffect, useState } from 'react';
+
+const LifeCycleExam = () => {
+
+  let [val, setVal] = useState(0);
+
+  useEffect(() => {
+    //재렌더링마다 코드 실행
+  });
+
+  useEffect(() => {
+    //mount시 1회 코드 실행
+
+    return ()=> {
+      //unMount 시 1회 코드 실행
+    }
+  }, []);
+
+  useEffect(() => {
+    //'val' 변수 변경 시 코드 실행
+  }, [val]);
+
+  const update = () => {
+    //컴포넌트 로드 & 업데이트 시 실행
+    setVal(val + 1);
+  };
+    return (
+      <div>
+        <h4>Hello LC !</h4>
+        <button onClick={update}>업데이트</button>
+        <h4 style={{display : "none"}}>{val}</h4>
+      </div>
+    );
+  }
 ```
