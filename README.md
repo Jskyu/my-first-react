@@ -273,7 +273,7 @@ Url Parameter는 말 그대로 URL 에 담겨있는 값을 파라미터로 사�
 Router 선언 시 url 부분중 parameter 로 사용할 값 앞에 클론(:)으로 명시한다.
 
 >Url Parameter 예시 \
-https://jskyu.github.io/my-first-react-shop/routeExam/Hello%20World!
+https://jskyu.github.io/my-first-react-shop/ 에서 상단의 RouteExam
 ```js
 //Router 선언
 // /page/1234 로 접속했을 시 파라미터는 1234가 된다.
@@ -312,7 +312,7 @@ CSS 파일을 사용하지 않아도 되고, 다른 CSS파일에 간섭하지 �
 ```
 
 > Styled-Components 예시 \
-https://jskyu.github.io/my-first-react-shop/styleComponent
+https://jskyu.github.io/my-first-react-shop/ 에서 상단의 StyleExam
 ```js
 import styled from 'styled-components';
 
@@ -359,7 +359,7 @@ const StyleComponent = () => {
 <br><br>
 
 > LifeCycle 주기별 실행 함수 \
-https://jskyu.github.io/my-first-react-shop/lifeCycleExam
+https://jskyu.github.io/my-first-react-shop/ 에서 상단의 LifeCycleExam
 ```js
 import { useEffect, useState } from 'react';
 
@@ -395,4 +395,45 @@ const LifeCycleExam = () => {
       </div>
     );
   }
+```
+
+### AJAX
+AJAX 는 Asynchronous JavaScript and XML의 약자로, 말 그대로 JavaScript와 XML을 이용한 비동기적 정보 교환 기법이다. \
+쉽게 말하자면 JS에서 HTTP 통신을 편하게 해주는 라이브러리 이다.\
+<br>
+
+> AJAX 세팅
+
+우선 위 강의에서는 aixos 라이브러를 사용하여 ajax를 사용하였으니 aixos를 설치한다.\
+터미널에서 `npm install axios`\
+사용할 js에서 `import axios from 'axios'`
+<br>
+
+> 리액트에서의 AJAX
+
+리액트에서 aixos를 사용하는 방법은 다음과 같이 매우 간단하다.
+
+1. GET
+```js
+  axios.get('URL')//'https://url' 로 get 요청을 보낸다.
+    .then((reponse) => {// then 은 성공했을 때 실행되는 메서드이다.
+      //reponse는 수신된 결과이다.
+      //성공 시 로직
+    }).catch((reponse) => {//catch 는 실패했을 때 실행되는 메서드이다.
+      //실패 시 로직
+  });
+```
+
+2. POST
+```js
+  axios.post('URL', {data : 'json'})//데이터 전송
+  .then((reponse) => {})
+  .catch((reponse) => {});
+```
+
+3. 여러개 동시에 보내기
+```js
+  Promise.all([
+    axios.get('URL1').then((reponse) => {}).catch((reponse) => {}), 
+    axios.get('URL2').then((reponse) => {}).catch((reponse) => {}) ]);
 ```
